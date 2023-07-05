@@ -21,12 +21,12 @@
             <div class="card-body py-5 px-md-5">
               <form action="{{ route('register') }}" method="POST">
                 
-        @csrf
+                @csrf
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <label class="form-label" for="name">Nama Lengkap</label>
+                        <label class="form-label" for="name">{{ __('Nama Lengkap') }}</label>
                       <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" required value="{{old('name')}}"  />
                       @error('name')
                       <div  class="invalid-feedback">
@@ -40,7 +40,7 @@
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                    <label class="form-label" for="email">Email</label>
+                    <label class="form-label" for="email">{{ __('Email Address') }}</label>
                       <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name ="email" required value="{{old('email')}}"  />
                       @error('email')
                       <div  class="invalid-feedback">
@@ -51,7 +51,7 @@
                   </div>
                   
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="password">Password</label>
+                    <label class="form-label" for="password">{{ __('Password') }}</label>
                   <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required />
                   @error('password')
                       <div  class="invalid-feedback">
@@ -60,11 +60,16 @@
                       @enderror
                 </div>
 
+                <div class="form-outline mb-4">
+                <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                </div>
+
                 
                 
                 <div>
                 <button type="submit" class="btn btn-primary btn-block mb-4" style="width:100%;" >
-                  Sign up
+                {{ __('Register') }}
                 </button>
                 </div>
                 

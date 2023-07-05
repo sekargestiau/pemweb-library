@@ -1,5 +1,5 @@
-@extends('layouts-admin.main-login')
-@section('title','Login Admin SeminarKu')
+@extends('layouts-user.main-login')
+@section('title','Login Website Library MCU')
 
     
 @section('container')
