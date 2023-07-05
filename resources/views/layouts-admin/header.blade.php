@@ -2,17 +2,17 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            
+            @auth
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-event"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin SeminarKu</div>
+                <div class="sidebar-brand-text mx-3">{{ Auth::user()->name }}</div>
                 <!-- <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div> -->
 
             </a>
-
+            @endauth
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -29,35 +29,32 @@
                 Interface
             </div> -->
 
-            <!-- Nav Item - Event Details -->
+            <!-- Nav Item - Data User -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.event-details') }}">
+                <a class="nav-link" href="{{ route('admin.data-user') }}">
                     <i class="fas fa-fw fa-calendar"></i>
-                    <span>Event Details</span></a>
+                    <span>Data User</span></a>
             </li>
 
 
-            <!-- Nav Item - Event Approval Request -->
+            <!-- Nav Item - Data Buku -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.event-approval-request') }}">
+                <a class="nav-link" href="{{ route('admin.data-buku') }}">
                     <i class="fas fa-fw fa-check-circle"></i>
-                    <span>Event Approval Request</span></a>
-            </li>
-
-
-            <!-- Nav Item - User Details -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.user-details') }}">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>User Details</span></a>
+                    <span>Data Buku</span></a>
             </li>
 
 
             <!-- Nav Item - Logout -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-fw fa-sign-out-alt"></i>
-                    <span>Logout</span></a>
+                    <span>Logout</span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+                
             </li>
 
             @auth

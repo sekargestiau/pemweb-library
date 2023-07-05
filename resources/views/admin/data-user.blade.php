@@ -1,5 +1,5 @@
 @extends('layouts-admin.main')
-@section('title','Data Buku - Library MCU')
+@section('title','Data User - Library MCU')
 
     
     @section('container')
@@ -51,7 +51,7 @@
 
         <!-- Topbar Search -->
         <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ url('data-buku')}}">  
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ url('data-user')}}">  
             <div class="input-group">
                 <input type="text" class="form-control bg-light border-0 small" name="keyword" value="{{ $keyword }}" placeholder="Search for..."
                     aria-label="Search" aria-describedby="basic-addon2">
@@ -273,7 +273,7 @@
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Data Buku</h1>
+<h1 class="h3 mb-2 text-gray-800">Data User</h1>
 <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
     For more information about DataTables, please visit the <a target="_blank"
         href="https://datatables.net">official DataTables documentation</a>.</p> -->
@@ -281,48 +281,35 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-    <a class="btn btn-secondary" href="#">TAMBAH DATA</a>
-
-         <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+        <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+        <a class="btn btn-secondary" href="#">TAMBAH DATA</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
             <thead align="center">
                     <tr align="center">
-                    <th>No</th>
-                        <th>Gambar Buku</th>
-                        <th>Judul Buku</th>
-                        <th>Penulis</th>
-                        <th>Penerbit</th>
-                        <th>Tahun Terbit</th>
-                        <th>Kategori</th>
-                        <th colspan="2">Manajemen</th>
+                        <th>No</th>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Manajemen</th>
                     </tr>
                 </thead>
                 <tfoot align="center">
                     <tr align="center">
                         <th>No</th>
-                        <th>Gambar Buku</th>
-                        <th>Judul Buku</th>
-                        <th>Penulis</th>
-                        <th>Penerbit</th>
-                        <th>Tahun Terbit</th>
-                        <th>Kategori</th>
-                        <th colspan="2">Manajemen</th>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Manajemen</th>
                     </tr>
                 </tfoot>
                 <tbody align="center">
                     <tr align="center">
                     <?php $i = 0;?>
-                    @foreach($books as $key=>$value)
-                        <td>{{ $books->firstItem() + $i }}</td>
-                        <td><img src="{{ asset($value->book_photo) }}" alt=""></td>
-                        <td>{{ $value->title }}</td>
-                        <td>{{ $value->author }}</td>
-                        <td>{{ $value->publisher }}</td>
-                        <td>{{ $value->year }}</td>
-                        <td>{{ $value->category }}</td>
+                    @foreach($user as $key=>$value)
+                        <td>{{ $user->firstItem() + $i }}</td>
+                        <td>{{ $value->name }}</td>
+                        <td>{{ $value->email }}</td>
                         <td><a class="btn btn-primary" href="#">EDIT</a></td>
                         <td>
                             <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                       
@@ -355,8 +342,7 @@
                                 </div>
                             </div>
 
-                            
-                    </tr>
+                        </tr>
                         <?php $i++; ?>
                         @endforeach
                 </tbody>
@@ -364,15 +350,15 @@
             <!-- Pagination -->
             <div>
                 Showing
-                {{ $books->firstItem() }}
+                {{ $user->firstItem() }}
                 to
-                {{ $books->lastItem() }}
+                {{ $user->lastItem() }}
                 of
-                {{ $books->total() }}
+                {{ $user->total() }}
                 entries
             </div>
             <div class="float-right">
-            {{ $books->links() }}
+            {{ $user->links() }}
             </div>
         </div>
     </div>
@@ -385,6 +371,6 @@
 <!-- End of Main Content -->
 
 
+    
 
 @endsection
-

@@ -35,26 +35,11 @@
         </div>
 
         <div class="row">
-        <?php $i = 1; ?>
-        @foreach ($pic_seminar as $row)
+        <!-- 
 
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-3" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center"></div>
-              <h4><a href="{{ route('dashboard.details-seminar', $row->id) }}">{{ $row->nama_seminar }}</a></h4>
-              <p>
-                  <b>Tanggal:</b> {{ date('d-m-Y', strtotime($row->tanggal_seminar)) }} <br>
-                  <b>Lokasi:</b> {{ $row->lokasi_seminar }} <br>
-                  <b>Biaya:</b> {{ $row->gratis_berbayar }} <br>
-                  <b>Tanggal Pendaftaran Awal:<br></b> {{ date('d-m-Y', strtotime($row->tgl_pendaftaran_awal)) }} <br>
-                  <b>Tanggal Pendaftaran Akhir:<br></b> {{ date('d-m-Y', strtotime($row->tgl_pendaftaran_akhir)) }} <br>
-              </p>
-
-            </div>
-          </div>
           <br>
 
-          <!-- <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
               <h4><a href="">Sed ut perspici</a></h4>
@@ -64,9 +49,8 @@
 
         </div>
 
-      </div> -->
-      <?php $i++; ?>
-      @endforeach
+      </div> 
+       -->
 
     </section>
     <!-- End Services Section -->

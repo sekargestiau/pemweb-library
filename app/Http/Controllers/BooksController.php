@@ -3,22 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends Controller
+class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function __construct()
-    {
-        $this->User = new User();
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return view('user.dashboard');
+        //
     }
 
     /**

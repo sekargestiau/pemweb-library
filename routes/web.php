@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -15,8 +17,16 @@ use App\Http\Controllers\UsersController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/', [UsersController::class, 'index']);
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [DashboardController::class, 'index_user']);
 
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index_user'])->name('home');
+Route::get('/admin/home', [App\Http\Controllers\DashboardController::class, 'index_admin'])->name('admin-home')->middleware('role');
+Route::get('/data-buku', [AdminController::class, 'show_books'])->name('admin.data-buku')->middleware('role');
+Route::get('/data-user', [AdminController::class, 'show_user'])->name('admin.data-user')->middleware('role');

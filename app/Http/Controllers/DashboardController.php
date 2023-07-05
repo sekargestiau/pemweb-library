@@ -4,23 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Books;
 
-class UserController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function __construct()
     {
-        $this->User = new User();
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index_user()
     {
         return view('user.dashboard');
+
     }
 
+    public function index_admin(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $books = Books::where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('author', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('publisher', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('year', 'LIKE', '%' . $keyword . '%');
+                
+        })
+        ->paginate(10);
+
+        $books->withPath('data-buku');
+        $books->appends($request->all());
+
+        return view('admin.data-buku', compact('books', 'keyword'));
+
+    }
     /**
      * Show the form for creating a new resource.
      */
