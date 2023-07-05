@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Books;
+
 
 class UserController extends Controller
 {
@@ -12,13 +14,25 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->User = new User();
         $this->middleware('auth');
     }
 
     public function index()
     {
-        return view('user.dashboard');
+        $books = Books::all();
+
+        return view('user.daftar-buku',['books' => $books]);
+    }
+
+    public function index_profile()
+    {
+        // $datas = User::all();
+        // return view('users', compact('datas'));
+        // $user = User::all();
+        $user = DB::table('users')->where('id', auth()->user()->id)->first();
+
+        return view('user.lihat-profile',['user' => $user]);
+
     }
 
     /**

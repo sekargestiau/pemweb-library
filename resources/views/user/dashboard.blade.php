@@ -8,8 +8,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-          <h1>Discover Exciting Events</h1>
-          <h2>Explore a Wide Array of Engaging Activities!</h2>
+          <h1>Discover an Enriching World of Knowledge </h1>
+          <h2>Explore a Wide Array of Captivating Books and Engaging Literary Events!</h2>
           <!-- <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
             <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
@@ -25,33 +25,30 @@
 
   <main id="main">
 
-    <!-- ======= Services Section ======= -->
+    <!-- ======= Dashboard Section ======= -->
     <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Seminar yang akan berlangsung</h2>
+          <h2>Selamat Datang Di Website Library MCU</h2>
           <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
 
         <div class="row">
-        <!-- 
-
+            <h4>Sambutan Kepala Perpustakaan MCU</h4>
+            <p align="justify">Assalamu'alaikum Wr. Wb.<br><br>
+                      Puji syukur kita panjatkan kepada Allah SWT yang telah memberikan limpahan rahmat dan nikmat kepada kita semua sehingga website Perpustakaan MCU dapat diaktifkan kembali.<br>
+                      <br>
+                      Website perpustakaan merupakan sebuah layanan web yang hadir sebagai media komunikasi dan interaksi antara perpustakaan dan civitas akademik universitas. Semua pihak yang berkepentingan dengan dunia pendidikan terutama yang berlangsung di universitas ini seperti dosen, tenaga kependidikan, dan mahasiswa dapat mengakses berbagai informasi yang disediakan. Informasi tersebut antara lain tentang profile perpustakaan, daftar buku yang ada di perpustakaan, peminjaman buku di perpustakaan, dan berbagai informasi penting lainnya. Melalui website ini kami akan mengkomunikasikan bagaimana detak jantung kegiatan perpustakaan dalam rangka memberikan layanan pendidikan terbaik kepada civitas akademik universitas.
+                      Mudah-mudahan kehadiran website ini akan memberikan manfaat kepada civitas akademik universitas dalam rangka memajukan pendidikan di Indonesia.
+                      <br><br>
+                      Wassalamu'alaikum Wr.Wb.</p><br>
+            <footer class="blockquote-footer">Kepala Perpustakaan MCU <cite title="Source Title"></cite></footer>
+                 
+          </div>
           <br>
 
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspici</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div> 
-       -->
-
+      
     </section>
     <!-- End Services Section -->
 

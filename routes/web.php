@@ -30,3 +30,5 @@ Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index_use
 Route::get('/admin/home', [App\Http\Controllers\DashboardController::class, 'index_admin'])->name('admin-home')->middleware('role');
 Route::get('/data-buku', [AdminController::class, 'show_books'])->name('admin.data-buku')->middleware('role');
 Route::get('/data-user', [AdminController::class, 'show_user'])->name('admin.data-user')->middleware('role');
+Route::get('/profile', [UsersController::class, 'index_profile'])->name('user.lihat-profile')->middleware('role');
+Route::get('/books', [UsersController::class, 'index'])->name('user.daftar-buku')->middleware('role');
