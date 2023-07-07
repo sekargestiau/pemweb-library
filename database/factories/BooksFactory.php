@@ -22,7 +22,8 @@ class BooksFactory extends Factory
             'publisher' => fake()->word(rand(5, 8), true),
             'year' => fake()->year('+10 years'),
             'category' => $this->faker->randomElement(['Slice Of Life', 'History', 'Science', 'Romance', 'Trilogy', 'Mystery', 'Comedy', 'Comics']),
-            
+            'sinopsis' => fake()->sentence(),
+
         ];
     }
 }

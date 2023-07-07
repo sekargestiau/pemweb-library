@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts-user.main')
 @section('title','Library MCU')
 
     
@@ -41,7 +41,7 @@
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-3" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><img src="{{ asset('assets/img/skills.png') }}" width="90%" align="center"></div>
-              <h4><a href="#">{{ $row->title }}</a></h4>
+              <h4><a href="{{ route('user.details-buku', $row->id) }}">{{ $row->title }}</a></h4>
               <p>
                   <b>Penulis :</b> {{ $row->author }} <br>
                   <b>Penerbit :</b> {{ $row->publisher }} <br>
@@ -53,35 +53,22 @@
           </div>
           <br>
 
-          <!-- <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspici</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-layer"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div> -->
+          
       <?php $i++; ?>
       @endforeach
+      <!-- Pagination -->
+      <div>
+        Showing
+        {{ $books->firstItem() }}
+        to
+        {{ $books->lastItem() }}
+        of
+        {{ $books->total() }}
+        entries
+      </div>
+      <div class="d-flex justify-content-end">
+        {{ $books->links() }}
+      </div>
 
     </section>
     <!-- End Services Section -->

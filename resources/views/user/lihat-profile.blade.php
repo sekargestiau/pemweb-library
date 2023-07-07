@@ -27,7 +27,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div>
-						<h4>Profile Saya <a href="{{ url('profil') }}"><i class="bi bi-pencil"></i></a></h4>
+						<h4>Profile Saya <a href="{{ url('profil') }}"></a></h4>
 						</div>
 						<div style="padding-top: 20px">
 							<table class="table">

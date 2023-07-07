@@ -18,7 +18,7 @@ class Role
         if(auth()->user()->role=='Admin'){
             return $next($request);
         }else{
-            return redirect('user.dashboard')->with('error','You have no admin access');
+            return redirect('home')->with('error','You have no admin access');
         }
     }
 }

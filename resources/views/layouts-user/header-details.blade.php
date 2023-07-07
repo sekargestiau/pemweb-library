@@ -10,6 +10,7 @@
         <ul>
         @auth
          
+          
           <li><a class="nav-link scrollto" href="{{url('home')}}">Dashboard</a></li>
           <li><a class="nav-link scrollto" href="{{url('books')}}">Daftar Buku</a></li>
           <li class="dropdown" style="color:white;"><a href="#"><span>{{ auth()->user()->name }}</span> <i class="bi bi-chevron-down"></i></a>

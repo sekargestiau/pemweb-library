@@ -34,25 +34,23 @@
 
             <!-- Nav Item - Logout -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fas fa-fw fa-sign-out-alt"></i>
-                    <span>Logout</span>
+                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); confirmLogout();">
+                  <i class="fas fa-fw fa-sign-out-alt"></i>
+                  <span>Logout</span>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
-                </form>
-                
+                  </form>
             </li>
+            
+                <script>
+                  function confirmLogout() {
+                    if (confirm('Apakah Anda yakin ingin logout?')) {
+                      document.getElementById('logout-form').submit();
+                    }
+                  }
+                </script>
 
-            @auth
-            @else
-            <!-- Nav Item - Login -->
-            <li class="nav-item">
-                <a class="nav-link" href="/login-admin">
-                    <i class="fas fa-fw fa-sign-in-alt"></i>
-                    <span>Login</span></a>
-            </li>
-            @endauth
 
             
 

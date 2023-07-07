@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        @include('layouts-user.head')
+        @include('layouts.head')
         <title>@yield('title')</title>
     </head>
   <body>
     <main>
-        @include('layouts-user.header-ip')
+        @include('layouts.header')
         @yield('container')
     </main>
-    
+    <footer>
+        @include('layouts.footer')
+    </footer>
   </body>
 </html>

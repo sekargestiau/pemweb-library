@@ -6,9 +6,11 @@
     </head>
   <body>
     <main>
-        @include('layouts-user.header-ip')
+        @include('layouts-user.header-details')
         @yield('container')
     </main>
-    
+    <footer>
+        @include('layouts-user.footer-details')
+    </footer>
   </body>
 </html>

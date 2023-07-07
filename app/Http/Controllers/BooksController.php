@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Books;
+
 
 class BooksController extends Controller
 {
@@ -35,7 +37,8 @@ class BooksController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $books = Books::find($id);
+        return view('user.details-buku', compact('books'));
     }
 
     /**

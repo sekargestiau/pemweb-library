@@ -8,19 +8,27 @@
       <nav id="navbar" class="navbar">
       @auth
         <ul>
-
-          <li><a class="nav-link scrollto" href="{{ route('user.daftar-buku') }}">Daftar Buku</a></li>
           <li><a class="nav-link scrollto" href="{{ url('home') }}">Dashboard</a></li>
-          <li class="dropdown"><span>{{ auth()->user()->name }}</span> <i class="bi bi-chevron-down"></i>
+          <li><a class="nav-link scrollto" href="{{ route('user.daftar-buku') }}">Daftar Buku</a></li>
+          <li class="dropdown" style="color:white;"><a href="#"><span>{{ auth()->user()->name }}</span> <i class="bi bi-chevron-down"></a></i>
             <ul>
               <li><a href="{{ route('user.lihat-profile') }}">Lihat Profil</a></li>
               <li>
-              <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit">Logout</button>
-              </form>
-                
-              </li>
+                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); confirmLogout();">
+                    {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                  </form>
+                </li>
+
+                <script>
+                  function confirmLogout() {
+                    if (confirm('Apakah Anda yakin ingin logout?')) {
+                      document.getElementById('logout-form').submit();
+                    }
+                  }
+                </script>
               
             </ul>
           </li>

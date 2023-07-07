@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $books = Books::all();
+        $books = Books::paginate(12);
 
         return view('user.daftar-buku',['books' => $books]);
     }
