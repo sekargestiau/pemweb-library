@@ -154,7 +154,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-    <a class="btn btn-secondary" href="#">TAMBAH DATA</a>
+    <a class="btn btn-secondary" href="{{ route('books-create') }}">TAMBAH DATA</a>
 
          <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
     </div>
@@ -196,7 +196,7 @@
                         <td>{{ $value->publisher }}</td>
                         <td>{{ $value->year }}</td>
                         <td>{{ $value->category }}</td>
-                        <td><a class="btn btn-primary" href="#">EDIT</a></td>
+                        <td><a class="btn btn-primary" href="{{url('data-buku/'.$value->id.'/edit')}}">EDIT</a></td>
                         <td>
                             <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                       
                         </td>
@@ -214,7 +214,7 @@
                                         </div>
                                         <div class="modal-body">Tekan tombol di bawah ini untuk menghapus data.</div>
                                         <div class="modal-footer">
-                                            <form action="#" method="POST">
+                                            <form action="{{ route('books.destroy', ['books' => $value->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">

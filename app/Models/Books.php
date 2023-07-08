@@ -16,6 +16,7 @@ class Books extends Model
         'publisher',
         'year',
         'category',
+        'sinopsis',
         'book_photo',
     ];
 }

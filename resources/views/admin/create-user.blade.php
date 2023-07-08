@@ -1,12 +1,12 @@
 @extends('layouts-admin.main')
-@section('title','Data User - Library MCU')
+@section('title','Data Buku - Library MCU')
 
     
     @section('container')
 
     @if (Session::has('success'))
         <!-- Modal Sukses Dihapus -->
-            <div class="modal fade" id="SuccessDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="SuccessAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -15,7 +15,7 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div class="modal-body"><b>Data Berhasil Dihapus!</b></div>
+                        <div class="modal-body"><b>Data Berhasil Ditambahkan!</b></div>
                     </div>
                 </div>
             </div>
@@ -23,11 +23,11 @@
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
                 $(document).ready(function() {
-                $('#SuccessDeleteModal').modal('show');
+                $('#SuccessAddModal').modal('show');
                 
                 // Menghapus sesi flash 'success' setelah beberapa saat
                 setTimeout(function() {
-                    $('#SuccessDeleteModal').modal('hide');
+                    $('#SuccessAddModal').modal('hide');
                     {{ Session::forget('success') }};
                 }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
                 });
@@ -50,18 +50,7 @@
         </button>
 
         <!-- Topbar Search -->
-        <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ url('data-user')}}">  
-            <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" name="keyword" value="{{ $keyword }}" placeholder="Search for..."
-                    aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+        
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
@@ -104,7 +93,7 @@
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
-                   
+                    
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -144,98 +133,37 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-<!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Data User</h1>
-<!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the <a target="_blank"
-        href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
 <!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-        <a class="btn btn-secondary" href="{{ route('user-create') }}">TAMBAH DATA</a>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
-            <thead align="center">
-                    <tr align="center">
-                        <th>No</th>
-                        <th>User</th>
-                        <th>Email</th>
-                        <th>Manajemen</th>
-                    </tr>
-                </thead>
-                <tfoot align="center">
-                    <tr align="center">
-                        <th>No</th>
-                        <th>User</th>
-                        <th>Email</th>
-                        <th>Manajemen</th>
-                    </tr>
-                </tfoot>
-                <tbody align="center">
-                    <tr align="center">
-                    <?php $i = 0;?>
-                    @foreach($user as $key=>$value)
-                        <td>{{ $user->firstItem() + $i }}</td>
-                        <td>{{ $value->name }}</td>
-                        <td>{{ $value->email }}</td>
-                        <td><a class="btn btn-primary" href="{{url('data-user/'.$value->id.'/edit')}}">EDIT</a></td>
-                        <td>
-                            <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                       
-                        </td>
-
-                        <!-- Delete Modal-->
-                        <div class="modal fade" id="deleteModal<?= $value["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Yakin untuk hapus data?</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">Tekan tombol di bawah ini untuk menghapus data.</div>
-                                        <div class="modal-footer">
-                                            <form action="{{ route('user.destroy', ['user' => $value->id]) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        DELETE
-                                                    </button>
-                                            </form>
-                                            <!-- <button class="btn btn-primary" type="button" data-dismiss="modal">DELETE</button> -->
-                                            <a class="btn btn-secondary" type="button" data-dismiss="modal">CANCEL</a>
-                                        </div>
-                                    </div>
-                                </div>
+<section id="inner-page">   
+            <div class="container" style="padding: 0 200px;">
+                <div class="card">
+                    <h3 class="text-center card-header">Tambah Data User</h3>
+                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-text grid-item p-4">
+                        <div class="mb-3">
+                                <label form="name" class="form-label">Nama Lengkap</label>
+                                <input type="text" name="name" class="form-control" id="name" aria-describedby="name" required>
                             </div>
-
-                        </tr>
-                        <?php $i++; ?>
-                        @endforeach
-                </tbody>
-            </table>
-            <!-- Pagination -->
-            <div>
-                Showing
-                {{ $user->firstItem() }}
-                to
-                {{ $user->lastItem() }}
-                of
-                {{ $user->total() }}
-                entries
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" aria-describedby="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Email</label>
+                                <input type="password" name="password" class="form-control" id="password" aria-describedby="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="profile_photo" class="form-label">Profile Photo</label>
+                                <input type="file" accept="image/png, image/gif, image/jpeg" name="profile_photo" class="form-control" id="profile_photo" aria-describedby="profile_photo" required>
+                            </div>
+                           
+                         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="float-right">
-            {{ $user->links() }}
-            </div>
-        </div>
-    </div>
-</div>
+        </section>
 
 </div>
 <!-- /.container-fluid -->
@@ -244,6 +172,6 @@
 <!-- End of Main Content -->
 
 
-    
 
 @endsection
+
