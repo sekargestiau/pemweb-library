@@ -1,40 +1,10 @@
-@extends('layouts-admin.main')
-@section('title','Data Buku - Library MCU')
+@extends('layouts-user.main')
+@section('title','Library MCU')
 
     
     @section('container')
 
-    @if (Session::has('success'))
-        <!-- Modal Sukses Dihapus -->
-            <div class="modal fade" id="SuccessAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body"><b>Data Berhasil Ditambahkan!</b></div>
-                    </div>
-                </div>
-            </div>
-        
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                $('#SuccessAddModal').modal('show');
-                
-                // Menghapus sesi flash 'success' setelah beberapa saat
-                setTimeout(function() {
-                    $('#SuccessAddModal').modal('hide');
-                    {{ Session::forget('success') }};
-                }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
-                });
-
-            </script>  
-    @endif
-
+    
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -135,23 +105,46 @@
 <div class="container-fluid">
 <!-- DataTales Example -->
 <section id="inner-page">   
+    <!-- Alert Sukses Registrasi -->
+    @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+    @endif
             <div class="container" style="padding: 0 200px;">
                 <div class="card">
-                    <h3 class="text-center card-header">Tambah Data User</h3>
-                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                    <h3 class="text-center card-header">Tambah Usulan Buku</h3>
+                    <form action="{{ route('usul.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-text grid-item p-4">
                         <div class="mb-3">
-                                <label form="name" class="form-label">Nama Lengkap</label>
-                                <input type="text" name="name" class="form-control" id="name" aria-describedby="name" required>
+                                <label form="title" class="form-label">Judul Buku</label>
+                                <input type="text" name="title" class="form-control" id="title" aria-describedby="title" required>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" aria-describedby="email" required>
+                                <label for="author" class="form-label">Penulis</label>
+                                <input type="text" name="author" class="form-control" id="author" aria-describedby="author" required>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" id="password" aria-describedby="email" required>
+                                <label for="publisher" class="form-label">Penerbit</label>
+                                <input type="text" name="publisher" class="form-control" id="publisher" aria-describedby="publisher" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="year" class="form-label">Tahun Terbit</label>
+                                <input type="text" name="year" class="form-control" id="year" aria-describedby="year" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Kategori</label>
+                                <input type="text" name="category" class="form-control" id="category" aria-describedby="category" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sinopsis" class="form-label">Sinopsis</label>
+                                <input type="text" name="sinopsis" class="form-control" id="sinopsis" aria-describedby="sinopsis" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="book_photo" class="form-label">Gambar Buku</label>
+                                <input type="file" accept="image/png, image/gif, image/jpeg" name="book_photo" class="form-control" id="book_photo" aria-describedby="book_photo" required>
                             </div>
                            
                          <button type="submit" class="btn btn-primary" name="submit">Submit</button>

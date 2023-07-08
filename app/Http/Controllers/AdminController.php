@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Books;
+use App\Models\Data_Peminjaman;
+
 
 class AdminController extends Controller
 {
@@ -59,6 +61,7 @@ class AdminController extends Controller
             'category' => ['required', 'string'],
             'sinopsis' => ['required', 'string'],
             'book_photo' => ['nullable'],
+            'status' => 'PENDING',
         ]);
 
         // send error message
@@ -84,7 +87,8 @@ class AdminController extends Controller
             'category' => $validated['category'],
             'sinopsis' => $validated['sinopsis'],
             'book_photo' => $validated['book_photo'],
-
+            'status' => 'PENDING',
+            
         ]);
 
         // send success message
@@ -106,7 +110,6 @@ class AdminController extends Controller
             'name' => ['required', 'string'],
             'email' => ['required', 'email'],
             'password' => ['required', 'string', 'min:8'],
-            'profile_photo' => ['nullable'],
         ]);
 
         // send error message
@@ -114,20 +117,12 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Validation failed!');
         }
 
-        if($request->file('profile_photo')) {
-            $fileName = time().'_'.$request->file('profile_photo')->getClientOriginalName();
-            $request->file('profile_photo')->move(public_path('profile_photo'), $fileName);
-            $filePath = 'profile_photo/'.$fileName;
-
-            $validated['profile_photo'] = $filePath;
-        }
 
         // create user
         User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
-            'profile_photo' => $validated['profile_photo'],
         ]);
 
         // send success message
@@ -153,6 +148,7 @@ class AdminController extends Controller
                 ->orWhere('year', 'LIKE', '%' . $keyword . '%');
                 
         })
+        ->where('status', 'accepted')
         ->paginate(10);
 
         $books->withPath('data-buku');
@@ -177,6 +173,46 @@ class AdminController extends Controller
         $user->appends($request->all());
 
         return view('admin.data-user',compact('user','keyword'));
+    }
+
+    public function show_pinjam(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $books = Data_Peminjaman::where(function ($query) use ($keyword) {
+            $query->where('name', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('title', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('tgl_pinjam', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('email', 'LIKE', '%' . $keyword . '%');
+                
+        })
+        ->paginate(10);
+
+        $books->withPath('data-pinjam');
+        $books->appends($request->all());
+
+        return view('admin.data-pinjam', compact('books', 'keyword'));
+    }
+
+    public function show_usul(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $books = Books::where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('author', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('year', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('category', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('publisher', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('status', 'LIKE', '%' . $keyword . '%');
+
+        })
+        ->paginate(10);
+
+        $books->withPath('data-usulan');
+        $books->appends($request->all());
+
+        return view('admin.data-usulan', compact('books', 'keyword'));
     }
 
     /**
@@ -250,6 +286,28 @@ class AdminController extends Controller
         //
     }
 
+    public function approve(Request $request, $id)
+    {
+        $books = Books::findOrFail($id);
+        $books->status = 'ACCEPTED';
+        $books->save();
+
+        // Tambahkan logika lain yang diperlukan
+
+        return redirect('data-usulan')->with('success', 'Usulan buku berhasil diterima');
+    }
+
+    public function reject(Request $request, $id)
+    {
+        $books = Books::findOrFail($id);
+        $books->status = 'REJECTED';
+        $books->save();
+
+        // Tambahkan logika lain yang diperlukan
+
+        return redirect('data-usulan')->with('success2', 'Usulan buku berhasil ditolak');
+    }
+
     public function destroy_user(string $id)
     {
         User::findOrFail($id)->delete();
@@ -262,5 +320,19 @@ class AdminController extends Controller
         Books::findOrFail($id)->delete();
     
         return redirect('data-buku')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function destroy_pinjam(string $id)
+    {
+        Data_Peminjaman::findOrFail($id)->delete();
+    
+        return redirect('data-pinjam')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function destroy_usulan(string $id)
+    {
+        Books::findOrFail($id)->delete();
+    
+        return redirect('data-usulan')->with('success', 'Data berhasil dihapus');
     }
 }

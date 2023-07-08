@@ -1,40 +1,10 @@
-@extends('layouts-admin.main')
-@section('title','Data Buku - Library MCU')
+@extends('layouts-user.main')
+@section('title','Library MCU')
 
     
     @section('container')
 
-    @if (Session::has('success'))
-        <!-- Modal Sukses Dihapus -->
-            <div class="modal fade" id="SuccessAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body"><b>Data Berhasil Ditambahkan!</b></div>
-                    </div>
-                </div>
-            </div>
-        
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                $('#SuccessAddModal').modal('show');
-                
-                // Menghapus sesi flash 'success' setelah beberapa saat
-                setTimeout(function() {
-                    $('#SuccessAddModal').modal('hide');
-                    {{ Session::forget('success') }};
-                }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
-                });
-
-            </script>  
-    @endif
-
+    
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -135,10 +105,17 @@
 <div class="container-fluid">
 <!-- DataTales Example -->
 <section id="inner-page">   
+    <!-- Alert Sukses Registrasi -->
+    @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+    @endif
             <div class="container" style="padding: 0 200px;">
                 <div class="card">
-                    <h3 class="text-center card-header">Tambah Data User</h3>
-                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                    <h3 class="text-center card-header">Pinjam Buku</h3>
+                    <form action="{{ route('pinjam.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-text grid-item p-4">
                         <div class="mb-3">
@@ -147,11 +124,15 @@
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" aria-describedby="email" required>
+                                <input type="text" name="email" class="form-control" id="email" aria-describedby="email" required>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" id="password" aria-describedby="email" required>
+                                <label for="title" class="form-label">Judul Buku</label>
+                                <input type="text" name="title" class="form-control" id="title" aria-describedby="title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tgl_pinjam" class="form-label">Tanggal Peminjaman</label>
+                                <input type="date" name="tgl_pinjam" class="form-control" id="tgl_pinjam" aria-describedby="tgl_pinjam" required>
                             </div>
                            
                          <button type="submit" class="btn btn-primary" name="submit">Submit</button>

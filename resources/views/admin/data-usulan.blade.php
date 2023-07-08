@@ -1,33 +1,64 @@
 @extends('layouts-admin.main')
-@section('title','Data User - Library MCU')
+@section('title','Data Buku - Library MCU')
 
     
     @section('container')
 
     @if (Session::has('success'))
-        <!-- Modal Sukses Dihapus -->
-            <div class="modal fade" id="SuccessDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body"><b>Data Berhasil Dihapus!</b></div>
+        <!-- Modal Sukses Diterima -->
+        <div class="modal fade" id="validasiAcceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
+                    <div class="modal-body"><b>Event Berhasil Diterima!</b></div>
                 </div>
             </div>
-        
+        </div>
+
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
                 $(document).ready(function() {
-                $('#SuccessDeleteModal').modal('show');
+                $('#validasiAcceptModal').modal('show');
                 
                 // Menghapus sesi flash 'success' setelah beberapa saat
                 setTimeout(function() {
-                    $('#SuccessDeleteModal').modal('hide');
+                    $('#validasiAcceptModal').modal('hide');
+                    {{ Session::forget('success') }};
+                }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
+                });
+
+            </script>  
+    @endif
+
+    @if (Session::has('success2'))
+        <!-- Modal Sukses Ditolak -->
+        <div class="modal fade" id="validasiRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"><b>Event Berhasil Ditolak!</b></div>
+                </div>
+            </div>
+        </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                $('#validasiRejectModal').modal('show');
+                
+                // Menghapus sesi flash 'success' setelah beberapa saat
+                setTimeout(function() {
+                    $('#validasiRejectModal').modal('hide');
                     {{ Session::forget('success') }};
                 }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
                 });
@@ -51,7 +82,7 @@
 
         <!-- Topbar Search -->
         <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ url('data-user')}}">  
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ url('data-usulan')}}">  
             <div class="input-group">
                 <input type="text" class="form-control bg-light border-0 small" name="keyword" value="{{ $keyword }}" placeholder="Search for..."
                     aria-label="Search" aria-describedby="basic-addon2">
@@ -104,7 +135,7 @@
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
-                   
+                    
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -146,7 +177,7 @@
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Data User</h1>
+<h1 class="h3 mb-2 text-gray-800">Data Usulan Buku</h1>
 <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
     For more information about DataTables, please visit the <a target="_blank"
         href="https://datatables.net">official DataTables documentation</a>.</p> -->
@@ -154,67 +185,87 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-        <a class="btn btn-secondary" href="{{ route('user-create') }}">TAMBAH DATA</a>
+         <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
             <thead align="center">
                     <tr align="center">
-                        <th>No</th>
-                        <th>User</th>
-                        <th>Email</th>
+                    <th>No</th>
+                        <th>Gambar Buku</th>
+                        <th>Judul Buku</th>
+                        <th>Penulis</th>
+                        <th>Penerbit</th>
+                        <th>Tahun Terbit</th>
+                        <th>Kategori</th>
+                        <th>Status</th>
                         <th>Manajemen</th>
                     </tr>
                 </thead>
                 <tfoot align="center">
                     <tr align="center">
                         <th>No</th>
-                        <th>User</th>
-                        <th>Email</th>
+                        <th>Gambar Buku</th>
+                        <th>Judul Buku</th>
+                        <th>Penulis</th>
+                        <th>Penerbit</th>
+                        <th>Tahun Terbit</th>
+                        <th>Kategori</th>
+                        <th>Status</th>
                         <th>Manajemen</th>
                     </tr>
                 </tfoot>
                 <tbody align="center">
                     <tr align="center">
                     <?php $i = 0;?>
-                    @foreach($user as $key=>$value)
-                        <td>{{ $user->firstItem() + $i }}</td>
-                        <td>{{ $value->name }}</td>
-                        <td>{{ $value->email }}</td>
+                    @foreach($books as $key=>$value)
+                        <td>{{ $books->firstItem() + $i }}</td>
+                        <td><img src="{{ asset($value->book_photo) }}" alt=""></td>
+                        <td>{{ $value->title }}</td>
+                        <td>{{ $value->author }}</td>
+                        <td>{{ $value->publisher }}</td>
+                        <td>{{ $value->year }}</td>
+                        <td>{{ $value->category }}</td>
+                        <td>{{ $value->status }}</td>
+            
                         <td>
-                            <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                       
+                            <?php if($value["status"]=='PENDING'):?>
+                                    <a class="btn btn-primary" data-toggle="modal" href="#"  data-target="#validasiModal<?= $value["id"]; ?>">VALIDASI</a> 
+                            <?php endif ?>
                         </td>
-
-                        <!-- Delete Modal-->
-                        <div class="modal fade" id="deleteModal<?= $value["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        
+                        <!-- Validasi Modal-->
+                        <div class="modal fade" id="validasiModal<?= $value["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Yakin untuk hapus data?</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Yakin untuk validasi?</h5>
                                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">Tekan tombol di bawah ini untuk menghapus data.</div>
+                                        <div class="modal-body">Tekan tombol di bawah ini untuk melakukan validasi.</div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('user.destroy', ['user' => $value->id]) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        DELETE
-                                                    </button>
-                                            </form>
-                                            <!-- <button class="btn btn-primary" type="button" data-dismiss="modal">DELETE</button> -->
-                                            <a class="btn btn-secondary" type="button" data-dismiss="modal">CANCEL</a>
+                                        <form action="{{ route('approve', $value->id) }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-primary" type="submit">ACCEPT</button>
+                                        </form>                                            
+                                        <form action="{{ route('reject', $value->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger" type="submit">REJECT</button>
+                                            </form>                                        
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                        </tr>
+                        
+
+                            
+                    </tr>
                         <?php $i++; ?>
                         @endforeach
                 </tbody>
@@ -222,15 +273,15 @@
             <!-- Pagination -->
             <div>
                 Showing
-                {{ $user->firstItem() }}
+                {{ $books->firstItem() }}
                 to
-                {{ $user->lastItem() }}
+                {{ $books->lastItem() }}
                 of
-                {{ $user->total() }}
+                {{ $books->total() }}
                 entries
             </div>
             <div class="float-right">
-            {{ $user->links() }}
+            {{ $books->links() }}
             </div>
         </div>
     </div>
@@ -243,6 +294,6 @@
 <!-- End of Main Content -->
 
 
-    
 
 @endsection
+

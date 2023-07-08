@@ -1,5 +1,5 @@
 @extends('layouts-admin.main')
-@section('title','Data User - Library MCU')
+@section('title','Data Buku - Library MCU')
 
     
     @section('container')
@@ -51,7 +51,7 @@
 
         <!-- Topbar Search -->
         <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ url('data-user')}}">  
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ url('data-pinjam')}}">  
             <div class="input-group">
                 <input type="text" class="form-control bg-light border-0 small" name="keyword" value="{{ $keyword }}" placeholder="Search for..."
                     aria-label="Search" aria-describedby="basic-addon2">
@@ -104,7 +104,7 @@
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
-                   
+                    
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -146,7 +146,7 @@
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Data User</h1>
+<h1 class="h3 mb-2 text-gray-800">Data Peminjaman Buku</h1>
 <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
     For more information about DataTables, please visit the <a target="_blank"
         href="https://datatables.net">official DataTables documentation</a>.</p> -->
@@ -154,35 +154,41 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-        <a class="btn btn-secondary" href="{{ route('user-create') }}">TAMBAH DATA</a>
+
+         <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" align="center">
             <thead align="center">
                     <tr align="center">
-                        <th>No</th>
-                        <th>User</th>
+                    <th>No</th>
+                        <th>Nama Peminjam</th>
                         <th>Email</th>
+                        <th>Judul Buku</th>
+                        <th>Tanggal Pinjam</th>
                         <th>Manajemen</th>
                     </tr>
                 </thead>
                 <tfoot align="center">
                     <tr align="center">
                         <th>No</th>
-                        <th>User</th>
+                        <th>Nama Peminjam</th>
                         <th>Email</th>
+                        <th>Judul Buku</th>
+                        <th>Tanggal Pinjam</th>
                         <th>Manajemen</th>
                     </tr>
                 </tfoot>
                 <tbody align="center">
                     <tr align="center">
                     <?php $i = 0;?>
-                    @foreach($user as $key=>$value)
-                        <td>{{ $user->firstItem() + $i }}</td>
+                    @foreach($books as $key=>$value)
+                        <td>{{ $books->firstItem() + $i }}</td>
                         <td>{{ $value->name }}</td>
                         <td>{{ $value->email }}</td>
+                        <td>{{ $value->title }}</td>
+                        <td>{{ $value->tgl_pinjam }}</td>
                         <td>
                             <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                       
                         </td>
@@ -200,7 +206,7 @@
                                         </div>
                                         <div class="modal-body">Tekan tombol di bawah ini untuk menghapus data.</div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('user.destroy', ['user' => $value->id]) }}" method="POST">
+                                            <form action="{{ route('pinjam.destroy', ['books' => $value->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">
@@ -214,7 +220,8 @@
                                 </div>
                             </div>
 
-                        </tr>
+                            
+                    </tr>
                         <?php $i++; ?>
                         @endforeach
                 </tbody>
@@ -222,15 +229,15 @@
             <!-- Pagination -->
             <div>
                 Showing
-                {{ $user->firstItem() }}
+                {{ $books->firstItem() }}
                 to
-                {{ $user->lastItem() }}
+                {{ $books->lastItem() }}
                 of
-                {{ $user->total() }}
+                {{ $books->total() }}
                 entries
             </div>
             <div class="float-right">
-            {{ $user->links() }}
+            {{ $books->links() }}
             </div>
         </div>
     </div>
@@ -243,6 +250,6 @@
 <!-- End of Main Content -->
 
 
-    
 
 @endsection
+

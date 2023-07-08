@@ -19,7 +19,7 @@
             <!-- Nav Item - Data User -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.data-user') }}">
-                    <i class="fas fa-fw fa-calendar"></i>
+                    <i class="fas fa-fw fa-user"></i>
                     <span>Data User</span></a>
             </li>
 
@@ -27,8 +27,22 @@
             <!-- Nav Item - Data Buku -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.data-buku') }}">
-                    <i class="fas fa-fw fa-check-circle"></i>
+                    <i class="fas fa-fw fa-book"></i>
                     <span>Data Buku</span></a>
+            </li>
+
+            <!-- Nav Item - Data USulan Buku -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.data-usulan') }}">
+                    <i class="fas fa-fw fa-check-circle"></i>
+                    <span>Data Usulan Buku</span></a>
+            </li>
+
+            <!-- Nav Item - Data Pinjam -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.data-pinjam') }}">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>Data Peminjaman Buku</span></a>
             </li>
 
 

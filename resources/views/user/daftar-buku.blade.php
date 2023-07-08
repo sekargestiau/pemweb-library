@@ -33,7 +33,15 @@
           <h2>Daftar Buku Library MCU</h2>
           <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
-
+        <form action="/daftar-buku" method="GET" class="d-flex" role="search">
+              @csrf
+                <input class="form-control me-2" type="text" name="keyword" size="20" style="padding-right:50px"autofocus autocomplete="off" placeholder="Masukkan Keyword" aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
+            </form>
+            <br>
+            <a class="btn btn-primary" href="{{ route('usul-create') }}">TAMBAH USULAN BUKU</a>
+      <br>
+        
         <div class="row">
         <?php $i = 1; ?>
         @foreach ($books as $row)
