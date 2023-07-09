@@ -23,9 +23,7 @@
                 
                 @csrf
                 <!-- 2 column grid layout with text inputs for the first and last names -->
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
+                <div class="form-outline mb-4">
                         <label class="form-label" for="name">{{ __('Nama Lengkap') }}</label>
                       <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" required value="{{old('name')}}"  />
                       @error('name')
@@ -34,12 +32,10 @@
                       </div>
                       @enderror
                     </div>
-                  </div>
+                  
                   
 
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
+                  <div class="form-outline mb-4">
                     <label class="form-label" for="email">{{ __('Email Address') }}</label>
                       <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name ="email" required value="{{old('email')}}"  />
                       @error('email')
@@ -48,7 +44,7 @@
                       </div>
                       @enderror
                     </div>
-                  </div>
+                 
                   
                 <div class="form-outline mb-4">
                     <label class="form-label" for="password">{{ __('Password') }}</label>

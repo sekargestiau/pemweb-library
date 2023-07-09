@@ -19,11 +19,25 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $books = Books::paginate(12);
+        $keyword = $request->keyword;
 
-        return view('user.daftar-buku',['books' => $books]);
+        $books = Books::where(function ($query) use ($keyword) {
+            $query->where('title', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('author', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('year', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('category', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('publisher', 'LIKE', '%' . $keyword . '%');
+
+        })
+        ->paginate(12);
+
+        $books->withPath('books');
+        $books->appends($request->all());
+
+
+        return view('user.daftar-buku',compact('books', 'keyword'));
     }
 
     public function index_profile()

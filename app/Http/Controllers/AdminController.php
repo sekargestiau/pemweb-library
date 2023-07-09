@@ -92,7 +92,60 @@ class AdminController extends Controller
         ]);
 
         // send success message
-        return redirect('data-buku')->with('success', 'Data Buku Berhasil Ditambahkan!');
+        return redirect('data-buku')->with('success2', 'Data Buku Berhasil Ditambahkan!');
+        // $model = new Books;
+        // $model->title = $request->title;
+        // $model->author = $request->author;
+        // $model->publisher = $request->publisher;
+        // $model->year = $request->year;
+        // $model->category = $request->category;
+        // $model->save();
+
+        // return redirect('admin-books');
+    }
+
+    public function store_books2(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string'],
+            'author' => ['required', 'string'],
+            'publisher' => ['required', 'string'],
+            'year' => ['required', 'string'],
+            'category' => ['required', 'string'],
+            'sinopsis' => ['required', 'string'],
+            'book_photo' => ['nullable'],
+            'status' => 'ACCEPTED',
+        ]);
+
+        // send error message
+        // send error message
+        if (!$validated) {
+            return redirect()->back()->with('error', 'Validation failed!');
+        }
+
+        if($request->file('book_photo')) {
+            $fileName = time().'_'.$request->file('book_photo')->getClientOriginalName();
+            $request->file('book_photo')->move(public_path('book_photo'), $fileName);
+            $filePath = 'book_photo/'.$fileName;
+
+            $validated['book_photo'] = $filePath;
+        }
+
+        // create user
+        Books::create([
+            'title' => $validated['title'],
+            'author' => $validated['author'],
+            'publisher' => $validated['publisher'],
+            'year' => $validated['year'],
+            'category' => $validated['category'],
+            'sinopsis' => $validated['sinopsis'],
+            'book_photo' => $validated['book_photo'],
+            'status' => 'ACCEPTED',
+            
+        ]);
+
+        // send success message
+        return redirect('data-buku')->with('success2', 'Data Buku Berhasil Ditambahkan!');
         // $model = new Books;
         // $model->title = $request->title;
         // $model->author = $request->author;
@@ -145,7 +198,10 @@ class AdminController extends Controller
             $query->where('title', 'LIKE', '%' . $keyword . '%')
                 ->orWhere('author', 'LIKE', '%' . $keyword . '%')
                 ->orWhere('publisher', 'LIKE', '%' . $keyword . '%')
-                ->orWhere('year', 'LIKE', '%' . $keyword . '%');
+                ->orWhere('year', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('category', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('sinopsis', 'LIKE', '%' . $keyword . '%');
+
                 
         })
         ->where('status', 'accepted')
@@ -253,7 +309,7 @@ class AdminController extends Controller
         $model->book_photo = $request->book_photo;
         $model->save();
 
-        return redirect('data-buku')->with('successEdit', 'Data Buku Berhasil Diperbarui!');
+        return redirect('data-buku')->with('success3', 'Data Buku Berhasil Diperbarui!');
     }
 
     public function edit_user(string $id)

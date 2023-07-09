@@ -4,7 +4,7 @@
     
     @section('container')
 
-    @if (Session::has('success'))
+    @if (Session::has('success2'))
         <!-- Modal Sukses Dihapus -->
             <div class="modal fade" id="SuccessAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -138,7 +138,7 @@
             <div class="container" style="padding: 0 200px;">
                 <div class="card">
                     <h3 class="text-center card-header">Tambah Data Buku</h3>
-                    <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('books.store2') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-text grid-item p-4">
                         <div class="mb-3">

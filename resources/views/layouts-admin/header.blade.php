@@ -16,6 +16,14 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin-home') }}">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            @can('isAdmin')
             <!-- Nav Item - Data User -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.data-user') }}">
@@ -37,14 +45,16 @@
                     <i class="fas fa-fw fa-check-circle"></i>
                     <span>Data Usulan Buku</span></a>
             </li>
-
+            @endcan
+            
+            @can('isUser')
             <!-- Nav Item - Data Pinjam -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.data-pinjam') }}">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>Data Peminjaman Buku</span></a>
             </li>
-
+            @endcan
 
             <!-- Nav Item - Logout -->
             <li class="nav-item">

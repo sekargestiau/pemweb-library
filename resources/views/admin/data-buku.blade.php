@@ -35,6 +35,68 @@
             </script>  
     @endif
 
+    @if (Session::has('success2'))
+        <!-- Modal Sukses Dihapus -->
+            <div class="modal fade" id="SuccessAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body"><b>Data Berhasil Ditambahkan!</b></div>
+                    </div>
+                </div>
+            </div>
+        
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                $('#SuccessAddModal').modal('show');
+                
+                // Menghapus sesi flash 'success' setelah beberapa saat
+                setTimeout(function() {
+                    $('#SuccessAddModal').modal('hide');
+                    {{ Session::forget('success') }};
+                }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
+                });
+
+            </script>  
+    @endif
+
+    @if (Session::has('success3'))
+        <!-- Modal Sukses Dihapus -->
+            <div class="modal fade" id="SuccessAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body"><b>Data Berhasil Diperbarui!</b></div>
+                    </div>
+                </div>
+            </div>
+        
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                $('#SuccessAddModal').modal('show');
+                
+                // Menghapus sesi flash 'success' setelah beberapa saat
+                setTimeout(function() {
+                    $('#SuccessAddModal').modal('hide');
+                    {{ Session::forget('success') }};
+                }, 1000000); // Menutup modal setelah 3 detik (3000 milidetik)
+                });
+
+            </script>  
+    @endif
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -190,7 +252,7 @@
                     <?php $i = 0;?>
                     @foreach($books as $key=>$value)
                         <td>{{ $books->firstItem() + $i }}</td>
-                        <td><img src="{{ asset($value->book_photo) }}" alt=""></td>
+                        <td><img src="{{ asset($value->book_photo) }}" width="50%" alt=""></td>
                         <td>{{ $value->title }}</td>
                         <td>{{ $value->author }}</td>
                         <td>{{ $value->publisher }}</td>

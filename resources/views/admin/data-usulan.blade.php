@@ -15,7 +15,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body"><b>Event Berhasil Diterima!</b></div>
+                    <div class="modal-body"><b>Usulan Buku Berhasil Diterima!</b></div>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body"><b>Event Berhasil Ditolak!</b></div>
+                    <div class="modal-body"><b>Usulan Buku Berhasil Ditolak!</b></div>
                 </div>
             </div>
         </div>
@@ -221,7 +221,7 @@
                     <?php $i = 0;?>
                     @foreach($books as $key=>$value)
                         <td>{{ $books->firstItem() + $i }}</td>
-                        <td><img src="{{ asset($value->book_photo) }}" alt=""></td>
+                        <td><img src="{{ asset($value->book_photo) }}" width="50%" alt=""></td>
                         <td>{{ $value->title }}</td>
                         <td>{{ $value->author }}</td>
                         <td>{{ $value->publisher }}</td>

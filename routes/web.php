@@ -40,10 +40,10 @@ Route::get('/usul-buku', [UserController::class, 'index_create_usul'])->name('us
 
 //ADMIN
 Route::get('/admin/home', [App\Http\Controllers\DashboardController::class, 'index_admin'])->name('admin-home')->middleware('role');
-Route::get('/data-buku', [AdminController::class, 'show_books'])->name('admin.data-buku')->middleware('role');
-Route::get('/data-user', [AdminController::class, 'show_user'])->name('admin.data-user')->middleware('role');
-Route::get('/data-pinjam', [AdminController::class, 'show_pinjam'])->name('admin.data-pinjam')->middleware('role');
-Route::get('/data-usulan', [AdminController::class, 'show_usul'])->name('admin.data-usulan')->middleware('role');
+Route::get('/data-buku', [AdminController::class, 'show_books'])->name('admin.data-buku')->middleware('can:isAdmin');
+Route::get('/data-user', [AdminController::class, 'show_user'])->name('admin.data-user')->middleware('can:isAdmin');
+Route::get('/data-pinjam', [AdminController::class, 'show_pinjam'])->name('admin.data-pinjam')->middleware('can:isUser');
+Route::get('/data-usulan', [AdminController::class, 'show_usul'])->name('admin.data-usulan')->middleware('can:isAdmin');
 
 // Route::get('/data-buku/{id}', [AdminController::class, 'show_more_details'])->name('admin.more-details')->middleware('role');
 Route::delete('/data-buku/{books}', [AdminController::class, 'destroy_books'])->name('books.destroy');
@@ -55,7 +55,7 @@ Route::post('/usulan/approve/{id}', [AdminController::class, 'approve'])->name('
 Route::delete('/usulan/reject/{id}', [AdminController::class, 'reject'])->name('reject');
 Route::get('/data-buku/create', [AdminController::class, 'index_create_books'])->name('books-create');
 Route::resource('/data-edit',AdminController::class);
-Route::post('/add-books', [AdminController::class, 'store_books'])->name('books.store');
+Route::post('/add-books', [AdminController::class, 'store_books2'])->name('books.store2');
 Route::get('/data-buku/{id}/edit', [AdminController::class, 'edit_books'])->name('books.edit');
 Route::put('/data-buku/{id}', [AdminController::class, 'update_books'])->name('data-books.update');
 Route::get('/data-user/create', [AdminController::class, 'index_create_user'])->name('user-create');

@@ -189,6 +189,7 @@
                         <td>{{ $value->email }}</td>
                         <td>{{ $value->title }}</td>
                         <td>{{ $value->tgl_pinjam }}</td>
+                        @can('crud-post', $post)
                         <td>
                             <a class="btn btn-danger" data-toggle="modal"  href="#"  data-target="#deleteModal<?= $value["id"]; ?>">DELETE</a>                       
                         </td>
@@ -219,7 +220,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                        @endcan
                             
                     </tr>
                         <?php $i++; ?>

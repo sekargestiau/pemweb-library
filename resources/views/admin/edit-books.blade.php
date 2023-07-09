@@ -15,7 +15,7 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div class="modal-body"><b>Data Berhasil Ditambahkan!</b></div>
+                        <div class="modal-body"><b>Data Berhasil Diperbarui!</b></div>
                     </div>
                 </div>
             </div>

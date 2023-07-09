@@ -18,27 +18,16 @@ class DashboardController extends Controller
 
     public function index_user()
     {
+        
         return view('user.dashboard');
 
     }
 
     public function index_admin(Request $request)
     {
-        $keyword = $request->keyword;
+        
 
-        $books = Books::where(function ($query) use ($keyword) {
-            $query->where('title', 'LIKE', '%' . $keyword . '%')
-                ->orWhere('author', 'LIKE', '%' . $keyword . '%')
-                ->orWhere('publisher', 'LIKE', '%' . $keyword . '%')
-                ->orWhere('year', 'LIKE', '%' . $keyword . '%');
-                
-        })
-        ->paginate(10);
-
-        $books->withPath('data-buku');
-        $books->appends($request->all());
-
-        return view('admin.data-buku', compact('books', 'keyword'));
+        return view('admin.dashboard');
 
     }
     /**
